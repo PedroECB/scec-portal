@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { UserInfo } from '../models/user-info.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ControllerHelper {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
 
   setUserInfo(userInfo: UserInfo) {
@@ -20,8 +21,13 @@ export class ControllerHelper {
     if (userInfo != null)
       user = JSON.parse(userInfo);
     else
-      return null
+      return null as any
 
     return user;
+  }
+
+  logout(){
+    localStorage.removeItem('userInfo');
+    this.router.navigate(['/login']);
   }
 }

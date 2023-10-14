@@ -1,6 +1,7 @@
-export interface UserInfo{
-    idUser?:string,
-    email?:string,
-    name?:string,
-    token?:string
+export interface UserInfo {
+    id?: string,
+    email?: string,
+    name?: string,
+    token?: string,
+    modules: any[]
 }

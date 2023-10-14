@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from "@angular/platform-browser";
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { UserInfo } from 'src/app/models/user-info.model';
 import { LoginService } from 'src/app/services/login.service';
+import { ControllerHelper } from 'src/app/utils/controller-helper';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -23,7 +26,7 @@ export class LoginComponent implements OnInit {
   })
 
   /* CONSTRUCTOR */
-  constructor(private titleService: Title, private loginService: LoginService) {
+  constructor(private titleService: Title, private loginService: LoginService, private controllerHelper:ControllerHelper, private router:Router) {
 
   }
 
@@ -49,9 +52,14 @@ export class LoginComponent implements OnInit {
       .pipe(finalize(() => {
         this.loading = false
       })).subscribe({
-        next: (value: any) => {
+        next: (value: UserInfo) => {
           console.log('Retorno')
           console.log(value)
+
+          if(value != null && value.token){
+            this.controllerHelper.setUserInfo(value);
+            this.router.navigateByUrl('/dashboard');
+          }
         },
         error: (value: any) => {
           console.log(value)
