@@ -1,0 +1,58 @@
+<div class="container-fluid container-login">
+    <div class="row">
+        <div class="col-md-6 col-box-logo">
+            <div class="box-logo">
+                <img src="./assets/img/logo-no-background.png" alt="" class="logo img-fluid"
+                    title="Sistema de Consulta de Entradas Cadavéricas">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box-login">
+                <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+                    <img src="./assets/img/logo-no-background.png" alt="" class="logo-mobile img-fluid">
+                    <h4 class="font-weight-bold my-4">Login</h4>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
+                                    aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="E-mail" aria-label="Email"
+                                formControlName="email" aria-describedby="basic-addon1">
+                        </div>
+                        <small class="d-block text-danger"
+                            *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched && formLogin.get('email')?.errors">
+                            Informe um endereço de e-mail válido!
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group mt-4">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"
+                                    aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" placeholder="Senha" aria-label="Password"
+                                formControlName="password" aria-describedby="basic-addon1">
+                        </div>
+                        <small class="d-block text-danger"
+                            *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched && formLogin.get('password')?.errors">
+                            Informe a senha!
+                        </small>
+                    </div>
+
+                    <button class="btn btn-primary dark-blue btn-block my-2 font-weight-bold" type="submit"
+                        [disabled]="loading">
+                        <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
+                            *ngIf="loading">
+                            <span class="sr-only">Loading...</span>
+                        </div>&nbsp;
+                        {{loading ? 'Carregando' : 'Entrar'}}
+                    </button>
+
+                    <div class="alert alert-danger bg-danger text-white text-center" role="alert" *ngIf="showError">
+                        {{errorMessage}}
+                    </div>
+
+                    <a href="" class="text-center d-block my-4">Solicitar acesso</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
