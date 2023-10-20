@@ -10,24 +10,40 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GlobalService } from './services/global.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule } from "@auth0/angular-jwt";
+import { ControllerHelper } from './utils/controller-helper';
+
+export function tokenGetter() {
+  return localStorage.getItem("user_token");
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomePageComponent
+    HomePageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    DashboardModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [],
+        disallowedRoutes: [],
+      },
+    })
   ],
   providers: [
-    GlobalService
+    GlobalService,
+    ControllerHelper
   ],
   bootstrap: [AppComponent]
 })

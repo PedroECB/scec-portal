@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from "@angular/platform-browser";
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
+import { LoginModel } from 'src/app/models/login.model';
 import { UserInfo } from 'src/app/models/user-info.model';
 import { LoginService } from 'src/app/services/login.service';
 import { ControllerHelper } from 'src/app/utils/controller-helper';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +16,9 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
   /* DECLARATIONS */
-  public loading: boolean = false;
+  loading: boolean = false;
   showError: boolean = false;
-  public errorMessage: string = '';
+  errorMessage: string = '';
 
   public formLogin = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,9 +26,7 @@ export class LoginComponent implements OnInit {
   })
 
   /* CONSTRUCTOR */
-  constructor(private titleService: Title, private loginService: LoginService, private controllerHelper:ControllerHelper, private router:Router) {
-
-  }
+  constructor(private titleService: Title, private loginService: LoginService, private controllerHelper: ControllerHelper, private router: Router) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('SCEC | Login')
@@ -36,14 +34,14 @@ export class LoginComponent implements OnInit {
 
   /* EVENTS */
   onSubmit() {
-    console.log('Submit')
-    console.log(this.formLogin)
 
     if (this.formLogin.invalid)
       return
 
     this.loading = true;
-    const userLogin = {
+
+    const userLogin: LoginModel =
+    {
       email: this.formLogin.get('email')?.value,
       password: this.formLogin.get('password')?.value
     }
@@ -52,19 +50,19 @@ export class LoginComponent implements OnInit {
       .pipe(finalize(() => {
         this.loading = false
       })).subscribe({
-        next: (value: UserInfo) => {
+        next: (user: UserInfo) => {
           console.log('Retorno')
-          console.log(value)
+          console.log(user)
 
-          if(value != null && value.token){
-            this.controllerHelper.setUserInfo(value);
-            this.router.navigateByUrl('/dashboard');
+          if (user != null && user.token) {
+            this.controllerHelper.setUserInfo(user);
+            this.router.navigateByUrl('/dashboard/home');
           }
         },
-        error: (value: any) => {
-          console.log(value)
+        error: (errorReturned: any) => {
+          console.log(errorReturned)
           this.showError = true;
-          this.errorMessage = value?.error?.message ? value.error.message: value.message;
+          this.errorMessage = errorReturned?.error?.message ? errorReturned.error.message : errorReturned.message;
 
           setTimeout(() => {
             this.showError = false;

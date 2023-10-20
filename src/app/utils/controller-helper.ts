@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { UserInfo } from '../models/user-info.model';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ControllerHelper {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
+  /* AUTH METHODS */
 
   setUserInfo(userInfo: UserInfo) {
-    window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+    let userTokenString = userInfo.token != null ? userInfo.token : '';
+    localStorage.setItem('userInfo', JSON.stringify(userInfo))
+    localStorage.setItem('user_token', userTokenString);
   }
 
   getUserInfo(): UserInfo | null {
@@ -21,13 +25,17 @@ export class ControllerHelper {
     if (userInfo != null)
       user = JSON.parse(userInfo);
     else
-      return null as any
+      return null
 
     return user;
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('user_token');
     this.router.navigate(['/login']);
   }
+
+  /* END AUTH METHODS */
+
 }
