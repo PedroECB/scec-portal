@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, provideRouter } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +16,12 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { ControllerHelper } from './utils/controller-helper';
 
 export function tokenGetter() {
-  return localStorage.getItem("user_token");
+  let user = localStorage.getItem("userInfo");
+
+  if (user != null)
+    return JSON.parse(user)?.token
+  else
+    return null
 }
 
 @NgModule({
@@ -43,7 +48,8 @@ export function tokenGetter() {
   ],
   providers: [
     GlobalService,
-    ControllerHelper
+    ControllerHelper,
+    // provideRouter([])
   ],
   bootstrap: [AppComponent]
 })

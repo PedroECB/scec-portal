@@ -15,19 +15,19 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Página inicial');
-    setTimeout(() => {
+    // setTimeout(() => {
 
-      this.loginService.testRequest()
-        .subscribe({
-          next: (value: any) => {
-            console.log(value)
-          },
-          error: (error) => {
-            console.log(error)
-          }
-        })
+    //   this.loginService.testRequest()
+    //     .subscribe({
+    //       next: (value: any) => {
+    //         console.log(value)
+    //       },
+    //       error: (error) => {
+    //         console.log(error)
+    //       }
+    //     })
 
-    }, 3000);
+    // }, 3000);
   }
 
 }

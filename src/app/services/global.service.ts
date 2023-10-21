@@ -15,7 +15,6 @@ export class GlobalService {
 
   constructor(private httpClient: HttpClient, private controllerHelper: ControllerHelper) { }
 
-
   setToggleSideBar($event: any) {
     this.toggleSideBarSubject.next($event);
   }
@@ -44,7 +43,6 @@ export class GlobalService {
       );
   }
 
-
   handleError = (error: HttpErrorResponse) => {
 
     if (error.status == 401) {
@@ -62,7 +60,8 @@ export class GlobalService {
         `Backend returned code ${error.status}, body was: `, error.error);
     }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Falha inesperada, tente novamente mais tarde.'));
+    const messageError = error?.error?.message ? error.error.message : error.message;
+    return throwError(() => new Error(messageError));
   }
 
 }

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(private titleService: Title, private loginService: LoginService, private controllerHelper: ControllerHelper, private router: Router) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('SCEC | Login')
+    this.titleService.setTitle('Login | SCEC')
   }
 
   /* EVENTS */
@@ -51,16 +51,12 @@ export class LoginComponent implements OnInit {
         this.loading = false
       })).subscribe({
         next: (user: UserInfo) => {
-          console.log('Retorno')
-          console.log(user)
-
           if (user != null && user.token) {
             this.controllerHelper.setUserInfo(user);
             this.router.navigateByUrl('/dashboard/home');
           }
         },
         error: (errorReturned: any) => {
-          console.log(errorReturned)
           this.showError = true;
           this.errorMessage = errorReturned?.error?.message ? errorReturned.error.message : errorReturned.message;
 
@@ -69,6 +65,14 @@ export class LoginComponent implements OnInit {
           }, 5000);
         }
       })
+  }
+
+  onClickRegister(){
+
+  }
+
+  onClickAboutButton(){
+    window.open("https://github.com/PedroECB/scec-portal", "_blank");
   }
 
   /* METHODS */

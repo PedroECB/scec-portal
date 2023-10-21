@@ -8,14 +8,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class ControllerHelper {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private jwtHelperService: JwtHelperService) { }
 
   /* AUTH METHODS */
 
   setUserInfo(userInfo: UserInfo) {
-    let userTokenString = userInfo.token != null ? userInfo.token : '';
     localStorage.setItem('userInfo', JSON.stringify(userInfo))
-    localStorage.setItem('user_token', userTokenString);
   }
 
   getUserInfo(): UserInfo | null {
@@ -28,6 +26,10 @@ export class ControllerHelper {
       return null
 
     return user;
+  }
+
+  getCurrentUserToken(): string {
+    return this.jwtHelperService.tokenGetter().toString();
   }
 
   logout() {

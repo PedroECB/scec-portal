@@ -15,8 +15,8 @@
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
                                     aria-hidden="true"></i></span>
-                            <input type="email" class="form-control" placeholder="E-mail" aria-label="Email" autofocus autocomplete="email"
-                                formControlName="email" aria-describedby="basic-addon1">
+                            <input type="email" class="form-control" placeholder="E-mail" aria-label="Email" autofocus
+                                autocomplete="email" formControlName="email" aria-describedby="basic-addon1">
                         </div>
                         <small class="d-block text-danger"
                             *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched && formLogin.get('email')?.errors">
@@ -28,8 +28,9 @@
                         <div class="input-group mt-4">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"
                                     aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" placeholder="Senha" aria-label="Password" autocomplete="current-password"
-                                formControlName="password" aria-describedby="basic-addon1">
+                            <input type="password" class="form-control" placeholder="Senha" aria-label="Password"
+                                autocomplete="current-password" formControlName="password"
+                                aria-describedby="basic-addon1">
                         </div>
                         <small class="d-block text-danger"
                             *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched && formLogin.get('password')?.errors">
@@ -50,7 +51,12 @@
                         {{errorMessage}}
                     </div>
 
-                    <a href="" class="text-center d-block my-4">Solicitar acesso</a>
+                    <a class="text-center d-block my-4" (click)="onClickRegister()" style="cursor: pointer;">Solicitar acesso</a>
+                    <span class="d-block text-center mt-5 text-dark-blue font-weight-bold" style="cursor: pointer;"
+                        (click)="onClickAboutButton()" title="Saiba mais sobre o projeto">
+                        <i class="fa fa-link font" aria-hidden="true" style="font-size: 12px;"></i>
+                        Sobre
+                    </span>
                 </form>
             </div>
         </div>
