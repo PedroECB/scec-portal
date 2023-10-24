@@ -16,7 +16,7 @@ export class LoginService {
   constructor(private globalService: GlobalService, private controllerHelper: ControllerHelper) { }
 
   auth(loginModel: LoginModel) {
-    return this.globalService.apiPost('login/auth', loginModel)
+    return this.globalService.apiPost('login/auth', loginModel, false, false)
       .pipe(
         tap((userInfo: UserInfo) => {
           console.log(userInfo)
@@ -25,31 +25,6 @@ export class LoginService {
         })
       );
   }
-
-  // isAuthenticated(): Observable<boolean> {
-  //   return this.isAuthenticatedUserSubject.asObservable();
-  // }
-
-  // getAuthenticatedUser(): Observable<UserInfo> {
-  //   return this.currentUserSubject$.asObservable();
-  // }
-
-  // checkTokenValidation(): Observable<boolean> {
-  //   return this.globalService.apiGet('login/checktoken')
-  //     .pipe(
-  //       tap((user: any) => {
-  //         if (user) {
-  //           this.currentUserSubject$.next(user);
-  //           this.isAuthenticatedUserSubject.next(true);
-  //         }
-  //       }),
-  //       map((u: any) => (u) ? true : false),
-  //       catchError((error) => {
-  //         this.controllerHelper.logout();
-  //         return of(false)
-  //       })
-  //     )
-  // }
 
   testRequest() {
     return this.globalService.apiGet('user/all', undefined, false);

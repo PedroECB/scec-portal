@@ -7,23 +7,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 
-// export const AuthGuard: CanActivateFn = (
-//   next: ActivatedRouteSnapshot,
-//   state: RouterStateSnapshot
-// ) => {
-//   const controllerHelper: ControllerHelper = inject(ControllerHelper);
-//   const jwtHelperService: JwtHelperService = inject(JwtHelperService);
-
-//   const router: Router = inject(Router);
-
-//   if (jwtHelperService.tokenGetter() && !jwtHelperService.isTokenExpired() && controllerHelper.getUserInfo() != null)
-//     return true;
-//   else {
-//     controllerHelper.logout();
-//     return router.createUrlTree(['/auth/login']);
-//   }
-// };
-
 export class AuthGuard {
 
   constructor(private controllerHelper: ControllerHelper, private jwtHelperService: JwtHelperService) { }

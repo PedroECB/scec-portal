@@ -1,0 +1,52 @@
+div.body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffffc7; /* Fundo branco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Certifique-se de que este elemento está na frente de outros elementos na página */
+}
+
+.loader {
+    display: flex;
+}
+
+.ball {
+    width: 20px;
+    height: 20px;
+    background-color: #332885; /* Cor azul */
+    border-radius: 50%;
+    margin: 0 5px; /* Espaço entre as bolinhas */
+    animation: move 0.2s linear infinite alternate; /* Reduzimos a duração para 0.2s para movimento mais rápido */
+}
+
+.ball1 {
+    animation-delay: 0s;
+}
+
+.ball2 {
+    animation-delay: 0.1s;
+}
+
+.ball3 {
+    animation-delay: 0.2s;
+}
+
+@keyframes move {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}

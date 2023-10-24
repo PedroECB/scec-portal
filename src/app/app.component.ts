@@ -8,13 +8,18 @@ import { GlobalService } from './services/global.service';
 })
 export class AppComponent {
   title = 'scec-spa';
-  public toggledSideBar:boolean = false;
+  public loading: boolean = false;
+  public toggledSideBar: boolean = false;
 
-  constructor(private globalService:GlobalService) {
+  constructor(private globalService: GlobalService) {
     // this.globalService.getToggleSideBar().subscribe(($event:any)=>{
     //   setTimeout(() => {
     //     this.toggledSideBar = !this.toggledSideBar
     //   }, 1000);
     // })
+
+    this.globalService.getLoading().subscribe((value: boolean) => {
+      this.loading = value
+    })
   }
 }

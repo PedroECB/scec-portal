@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError, lastValueFrom, map, takeUntil, tap, throwError } from 'rxjs';
+import { Observable, Subject, catchError, finalize, lastValueFrom, map, takeUntil, tap, throwError } from 'rxjs';
 import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { environment } from '../../environments/environment';
 import { ControllerHelper } from 'src/app/utils/controller-helper';
@@ -12,8 +12,21 @@ export class GlobalService {
   private headersAuth = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + 'token' });
   private headersNoAuth = new HttpHeaders({ 'Content-Type': 'application/json' });
   private toggleSideBarSubject: Subject<any> = new Subject<any>();
+  private loadingSubject: Subject<any> = new Subject<any>();
+
 
   constructor(private httpClient: HttpClient, private controllerHelper: ControllerHelper) { }
+
+  /* SETTERS ANG GETTER SUBJECTS */
+
+  setLoading(loading: boolean = false) {
+    this.loadingSubject.next(loading);
+  }
+
+  getLoading() {
+    return this.loadingSubject.asObservable();
+  }
+
 
   setToggleSideBar($event: any) {
     this.toggleSideBarSubject.next($event);
@@ -25,20 +38,30 @@ export class GlobalService {
 
   /* REQUESTS */
 
-  apiGet(url: string, params?: HttpParams, isLogged: boolean = false): Observable<any> {
+  apiGet(url: string, params?: HttpParams, isLogged: boolean = false, loading: boolean = false): Observable<any> {
     let headers = isLogged ? this.headersAuth : this.headersNoAuth;
     let apiUrl = environment.apiUrl + url;
+
+    if (loading)
+      this.setLoading(true);
+
     return this.httpClient.get(apiUrl, { headers: headers, params: params })
       .pipe(
+        finalize(() => this.setLoading(false)),
         catchError(this.handleError)
       );
   }
 
-  apiPost(url: string, data?: any, isLogged: boolean = false): Observable<any> {
+  apiPost(url: string, data?: any, isLogged: boolean = false, loading: boolean = false): Observable<any> {
     let headers = isLogged ? this.headersAuth : this.headersNoAuth;
     let apiUrl = environment.apiUrl + url;
+
+    if (loading)
+      this.setLoading(true);
+
     return this.httpClient.post(apiUrl, data, { headers: headers })
       .pipe(
+        finalize(() => this.setLoading(false)),
         catchError(this.handleError)
       );
   }

@@ -9,9 +9,7 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private titleService: Title, private loginService: LoginService) {
-
-  }
+  constructor(private titleService: Title, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.titleService.setTitle('Página inicial');
