@@ -16,6 +16,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { ControllerHelper } from './utils/controller-helper';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { SharedModule } from './shared/shared.module';
+import { RegisterComponent } from './pages/register/register.component';
+import { CommonModule } from '@angular/common';
 
 export function tokenGetter() {
   let user = localStorage.getItem("userInfo");
@@ -32,6 +34,7 @@ export function tokenGetter() {
     LoginComponent,
     HomePageComponent,
     NotFoundComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
+    CommonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

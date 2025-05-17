@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   constructor(private titleService: Title, private loginService: LoginService, private controllerHelper: ControllerHelper, private router: Router) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Login | SCEC')
+    this.titleService.setTitle('Login')
   }
 
   /* EVENTS */
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   onClickRegister(){
-
+    this.router.navigateByUrl('/register')
   }
 
   onClickAboutButton(){

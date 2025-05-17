@@ -2,8 +2,11 @@
     <div class="row">
         <div class="col-md-6 col-box-logo">
             <div class="box-logo">
-                <img src="./assets/img/logo-no-background.png" alt="" class="logo img-fluid"
+                <img src="./assets/img/logo-no-background.png" alt="Imagem logo SCEC" class="logo img-fluid"
                     title="Sistema de Consulta de Entradas Cadavéricas">
+            </div>
+            <div>
+
             </div>
         </div>
         <div class="col-md-6">
@@ -38,7 +41,7 @@
                         </small>
                     </div>
 
-                    <button class="btn btn-primary dark-blue btn-block my-2 font-weight-bold" type="submit"
+                    <button class="btn btn-primary dark-blue btn-block my-2 font-weight-bold" type="submit" title="Acessar área administrativa"
                         [disabled]="loading">
                         <div class="spinner-border" role="status" style="width: 1.3rem; height: 1.3rem;"
                             *ngIf="loading">
@@ -51,12 +54,15 @@
                         {{errorMessage}}
                     </div>
 
-                    <a class="text-center d-block my-4" (click)="onClickRegister()" style="cursor: pointer;">Solicitar acesso</a>
-                    <span class="d-block text-center mt-5 text-dark-blue font-weight-bold" style="cursor: pointer;"
+                    <a class="text-center d-block my-4" (click)="onClickRegister()" style="cursor: pointer;" title="Solicitar acesso à área administrativa">Solicitar acesso</a>
+                    <span class="d-block text-center mt-2 text-dark-blue font-weight-bold" style="cursor: pointer;"
                         (click)="onClickAboutButton()" title="Saiba mais sobre o projeto">
                         <i class="fa fa-link font" aria-hidden="true" style="font-size: 12px;"></i>
                         Sobre
                     </span>
+                    <div class="box-instituicoes-logo">
+                        <img src="./assets/img/governo-da-bahia-logo.png" class="img-fluid" alt="Imagem logo estado da bahia" title="Governo do estado da Bahia">
+                    </div>
                 </form>
             </div>
         </div>

@@ -14,7 +14,6 @@ export class GlobalService {
   private toggleSideBarSubject: Subject<any> = new Subject<any>();
   private loadingSubject: Subject<any> = new Subject<any>();
 
-
   constructor(private httpClient: HttpClient, private controllerHelper: ControllerHelper) { }
 
   /* SETTERS ANG GETTER SUBJECTS */
@@ -39,8 +38,8 @@ export class GlobalService {
   /* REQUESTS */
 
   apiGet(url: string, params?: HttpParams, isLogged: boolean = false, loading: boolean = false): Observable<any> {
-    let headers = isLogged ? this.headersAuth : this.headersNoAuth;
-    let apiUrl = environment.apiUrl + url;
+    let headers: HttpHeaders = isLogged ? this.headersAuth : this.headersNoAuth;
+    let apiUrl: string = environment.apiUrl + url;
 
     if (loading)
       this.setLoading(true);
@@ -53,8 +52,8 @@ export class GlobalService {
   }
 
   apiPost(url: string, data?: any, isLogged: boolean = false, loading: boolean = false): Observable<any> {
-    let headers = isLogged ? this.headersAuth : this.headersNoAuth;
-    let apiUrl = environment.apiUrl + url;
+    let headers: HttpHeaders = isLogged ? this.headersAuth : this.headersNoAuth;
+    let apiUrl: string = environment.apiUrl + url;
 
     if (loading)
       this.setLoading(true);
@@ -73,7 +72,7 @@ export class GlobalService {
       this.controllerHelper.logout();
     }
 
-    if (error.status === 0) {
+    if (error.status == 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
     } else {
